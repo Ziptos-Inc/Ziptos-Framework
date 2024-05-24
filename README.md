@@ -1,6 +1,6 @@
-# BAPT Coin Deployer
+# ZIPTOS Coin Deployer
 
-## Onchain - Move modules
+## contract - Move modules
 
 ### Set up - cli:
 Assuming the aptos cli is not configured, and install the aptos cli from [here](https://aptos.dev/tools/aptos-cli/install-cli/)
@@ -34,9 +34,9 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
             }
         ```
 
-    - Publish the modules: `aptos move publish --profile default --named-addresses bapt_framework=default`
+    - Publish the modules: `aptos move publish --profile default --named-addresses ziptos_framework=default`
         ```console
-        ➜  onchain aptos move publish --profile default --named-addresses bapt_framework=default
+        ➜  onchain aptos move publish --profile default --named-addresses ziptos_framework=default
             Compiling, may take a little while to download git dependencies...
             UPDATING GIT DEPENDENCY https://github.com/aptos-labs/aptos-core.git
             INCLUDING DEPENDENCY AptosFramework
@@ -198,17 +198,17 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
                 }
                 },
                 {
-                "0x1::coin::CoinInfo<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::BAPT>": {
+                "0x1::coin::CoinInfo<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::ZIPTOS>": {
                     "decimals": 9,
-                    "name": "BAPT",
+                    "name": "ZIPTOS",
                     "supply": {
                     "vec": []
                     },
-                    "symbol": "BAPT"
+                    "symbol": "ZIPTOS"
                 }
                 },
                 {
-                "0x1::coin::CoinStore<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::BAPT>": {
+                "0x1::coin::CoinStore<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::ZIPTOS>": {
                     "coin": {
                     "value": "18446744073709551615"
                     },
@@ -260,7 +260,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
                 }
                 },
                 {
-                "0x1::managed_coin::Capabilities<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::BAPT>": {
+                "0x1::managed_coin::Capabilities<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::ZIPTOS>": {
                     "burn_cap": {
                     "dummy_field": false
                     },
@@ -277,15 +277,15 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
         ```
         The deployed coin info/caps are:
         ```console
-        "0x1::coin::CoinInfo<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::BAPT>": {
+        "0x1::coin::CoinInfo<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::ZIPTOS>": {
             "decimals": 9,
-            "name": "BAPT",
+            "name": "ZIPTOS",
             "supply": {
             "vec": []
             },
-            "symbol": "BAPT"
+            "symbol": "ZIPTOS"
         },
-        "0x1::managed_coin::Capabilities<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::BAPT>": {
+        "0x1::managed_coin::Capabilities<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::ZIPTOS>": {
             "burn_cap": {
             "dummy_field": false
             },
@@ -299,7 +299,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
         ```
         Finally the Coin Store:
         ```console
-        "0x1::coin::CoinStore<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::BAPT>": {
+        "0x1::coin::CoinStore<0x6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b::Tokens::ZIPTOS>": {
             "coin": {
             "value": "18446744073709551615"
             },
@@ -352,7 +352,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
 
 
 ### Flow
-#### Admin(bapt_framework)
+#### Admin(ziptos_framework)
 1. Publish the deployer module.
 2. Initialize the module with the help of the script in the `admin_script.move`.
 
