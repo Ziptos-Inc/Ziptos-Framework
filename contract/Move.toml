@@ -1,0 +1,17 @@
+[package]
+name = "coin-deployer"
+version = "1.0.0"
+authors = []
+
+[addresses]
+ziptos_framework = "0x6e57ae098ab06ecc491d688a255b64b61dd52dbb58d2cce46e7def6013ffc2cd"
+AVI="0x6e57ae098ab06ecc491d688a255b64b61dd52dbb58d2cce46e7def6013ffc2cd"
+[dev-addresses]
+
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]
