@@ -5,11 +5,11 @@
 ### Set up - cli:
 Assuming the aptos cli is not configured, and install the aptos cli from [here](https://aptos.dev/tools/aptos-cli/install-cli/)
 
-- cd into: `cd onchain`
+- cd into: `cd contract`
 - setting up aptos cli: 
     - `aptos init`
         ```console
-        ➜  onchain aptos init                                                                   
+        ➜  contract aptos init                                                                   
         Configuring for profile default
         Choose network from [devnet, testnet, mainnet, local, custom | defaults to devnet]
 
@@ -28,7 +28,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
         ```
     - fund the default account: `aptos account fund-with-faucet --account default`
         ```console
-        ➜  onchain aptos account fund-with-faucet --account default                             
+        ➜  contract aptos account fund-with-faucet --account default                             
             {
             "Result": "Added 100000000 Octas to account 6e883ebdb5d98037043e6133620889b36aefd225ca8639fb19bac0f7d8d71f7b"
             }
@@ -36,7 +36,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
 
     - Publish the modules: `aptos move publish --profile default --named-addresses ziptos_framework=default`
         ```console
-        ➜  onchain aptos move publish --profile default --named-addresses ziptos_framework=default
+        ➜  contract aptos move publish --profile default --named-addresses ziptos_framework=default
             Compiling, may take a little while to download git dependencies...
             UPDATING GIT DEPENDENCY https://github.com/aptos-labs/aptos-core.git
             INCLUDING DEPENDENCY AptosFramework
@@ -62,7 +62,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
         ```
     - Run the script to initialize the deployer module: `aptos move run-script --compiled-script-path build/coin-deployer/bytecode_scripts/init.mv --profile default`
         ```console
-        ➜  onchain aptos move run-script --compiled-script-path build/coin-deployer/bytecode_scripts/init.mv --profile default
+        ➜  contract aptos move run-script --compiled-script-path build/coin-deployer/bytecode_scripts/init.mv --profile default
             Do you want to submit a transaction for a range of [50300 - 75400] Octas at a gas unit price of 100 Octas? [yes/no] >
             yes
             {
@@ -81,7 +81,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
         ```
     - Run the script to generate the coins: `aptos move run-script --compiled-script-path build/coin-deployer/bytecode_scripts/generate_coin.mv --profile default `
         ```console
-        ➜  onchain aptos move run-script --compiled-script-path build/coin-deployer/bytecode_scripts/generate_coin.mv --profile default 
+        ➜  contract aptos move run-script --compiled-script-path build/coin-deployer/bytecode_scripts/generate_coin.mv --profile default 
             Do you want to submit a transaction for a range of [151100 - 226600] Octas at a gas unit price of 100 Octas? [yes/no] >
             yes
             {
@@ -100,7 +100,7 @@ Assuming the aptos cli is not configured, and install the aptos cli from [here](
         ```
     - To verify, you can check the account list: `aptos account list`
         ```console
-        ➜  onchain aptos account list                                                                                                  
+        ➜  contract aptos account list                                                                                                  
             {
             "Result": [
                 {
