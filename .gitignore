@@ -1,2 +1,7 @@
 /contract/build/
 /contract/.aptos
+.aptos
+/Econia
+/facoin/build
+/zipdrip_framework/build
+/ziployer_framework/build

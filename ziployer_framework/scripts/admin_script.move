@@ -4,8 +4,6 @@ script {
     fun init(ziptos_framework: &signer, fee: u64, owner: address) {//change the fee accordingly
         Deployer::init(ziptos_framework, fee, owner);
     }
-
-    
 }
 
 script {

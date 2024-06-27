@@ -1,5 +1,13 @@
 module ziptos_framework::Deployer {
 
+    use aptos_framework::fungible_asset::{Self, MintRef, TransferRef, BurnRef, Metadata, FungibleAsset};
+    use aptos_framework::object::{Self, Object};
+    use aptos_framework::primary_fungible_store;
+    use aptos_framework::function_info;
+    use aptos_framework::dispatchable_fungible_asset;
+    use std::error;
+    use std::option;
+
     use aptos_framework::coin::{
         Self, 
         BurnCapability, 
@@ -9,7 +17,7 @@ module ziptos_framework::Deployer {
     use aptos_framework::aptos_coin::AptosCoin;
     use aptos_framework::managed_coin;
     use std::signer;
-    use std::string::{String};
+    use std::string::{Self,String,utf8};
 
     struct Config has key {
         owner: address,
@@ -26,6 +34,13 @@ module ziptos_framework::Deployer {
     const ERROR_INVALID_ZIPTOS_ACCOUNT: u64 = 0;
     const ERROR_ERROR_INSUFFICIENT_APT_BALANCE: u64 = 1;
     const INSUFFICIENT_APT_BALANCE: u64 = 2;
+
+    /// Only fungible asset metadata owner can make changes.
+    const ENOT_OWNER: u64 = 1;
+    /// The FA coin is paused.
+    const EPAUSED: u64 = 2;
+
+    const ASSET_SYMBOL: vector<u8> = b"FA";
 
 
     entry public fun init(ziptos_framework: &signer, fee: u64, owner: address){
