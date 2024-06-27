@@ -104,9 +104,12 @@ The move contracts in ziptos need aptos CLI to compile. Assuming the aptos cli i
 ## Usage
 - To bulksend NFT V2
 
-  `entry fun bulkSendNftV2<Token : key>(deployer: &signer, nftAddresses: vector<Object<Token>>,to: vector<address>) acquires Config {
-        let length_Nft: u64 = vector::length<Object<Token>>(&nftAddresses);
-        let length_to: u64 = vector::length<address>(&to);
+  ```
+      entry fun bulkSendNftV2<Token : key>(deployer: &signer, nftAddresses: vector<Object<Token>>,to: vector<address>) acquires Config {
+
+      let length_Nft: u64 = vector::length<Object<Token>>(&nftAddresses);
+
+      let length_to: u64 = vector::length<address>(&to);
 
         assert!(
             length_Nft == length_to, 
@@ -118,18 +121,19 @@ The move contracts in ziptos need aptos CLI to compile. Assuming the aptos cli i
         };
 
         collect_nftFee(deployer,length_Nft);
-        
-    }`
+        }
+  ```
 
 - To bulksend NFT V1
   
-  `entry fun bulkSendNftV1(deployer: &signer,
-        receiver: vector<address>,
-        creator: address,
-        collection: String,
-        name: vector<String>,
-        property_version: vector<u64>,
-        amount: u64,) acquires Config  {
+  ```
+        entry fun bulkSendNftV1(deployer: &signer,
+      receiver: vector<address>,
+      creator: address,
+      collection: String,
+      name: vector<String>,
+      property_version: vector<u64>,
+      amount: u64,) acquires Config  {
         
         let length_Name: u64 = vector::length<String>(&name);
         let length_To: u64 = vector::length<address>(&receiver);
@@ -151,18 +155,22 @@ The move contracts in ziptos need aptos CLI to compile. Assuming the aptos cli i
         };
 
         collect_nftFee(deployer,length_To);
-    }`
+        }
+  ```
 
 - To bulksend Legacy Coin
 
-    ` public entry fun bulkSendLegacyCoin<CoinType>(deployer: &signer, to:  vector<address>, amount: vector<u64>) acquires Config  {
+    ```
+    public entry fun bulkSendLegacyCoin<CoinType>(deployer: &signer, to:  vector<address>, amount: vector<u64>) acquires Config  {
         batch_transfer_coins<CoinType>(deployer,to,amount);
         let length_to: u64 = vector::length<address>(&to);
         collect_legacyCoinFee(deployer,length_to)
-    }`
+    }
+    ```
 
 - To bulksend Fungible Asset
-      `
+      ```
+
       entry fun bulkSendFungibleAsset<Metadata : key>(sender: &signer, metadata: object::Object<Metadata>, recipient: vector<address>, amount: vector<u64>) acquires Config {
 
         let length_Amount: u64 = vector::length<u64>(&amount);
@@ -178,7 +186,8 @@ The move contracts in ziptos need aptos CLI to compile. Assuming the aptos cli i
         };
 
         collect_fungibleAssetFee(sender,length_Amount);
-    }`
+        }
+  ```
     
   
 <p align="center">
