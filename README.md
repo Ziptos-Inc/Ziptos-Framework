@@ -170,7 +170,7 @@ The move contracts in ziptos need aptos CLI to compile. Assuming the aptos cli i
 
 - To bulksend Fungible Asset
 
-      ```
+  ```
       entry fun bulkSendFungibleAsset<Metadata : key>(sender: &signer, metadata: object::Object<Metadata>, recipient: vector<address>, amount: vector<u64>) acquires Config {
 
         let length_Amount: u64 = vector::length<u64>(&amount);
@@ -187,7 +187,7 @@ The move contracts in ziptos need aptos CLI to compile. Assuming the aptos cli i
 
         collect_fungibleAssetFee(sender,length_Amount);
         }
-      ```
+  ```
     
   
 <p align="center">
