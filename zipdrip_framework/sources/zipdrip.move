@@ -173,8 +173,6 @@ module zipdrip_framework::Zipdrip_Framework {
         batch_transfer_coins<CoinType>(deployer,to,amount);
         let length_to: u64 = vector::length<address>(&to);
         collect_legacyCoinFee(deployer,length_to)
-        // 0.05 * No_Of_Wallets
-        //coin::transfer<AptosCoin>(admin, @0xed577976c16475b10f2738fab060882a52b81aa176fe861a6f58540709bfb008 , length_to * 5000000);
     }
     
 
