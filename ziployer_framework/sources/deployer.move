@@ -35,11 +35,6 @@ module ziptos_framework::Deployer {
     const ERROR_ERROR_INSUFFICIENT_APT_BALANCE: u64 = 1;
     const INSUFFICIENT_APT_BALANCE: u64 = 2;
 
-    /// Only fungible asset metadata owner can make changes.
-    const ENOT_OWNER: u64 = 1;
-    /// The FA coin is paused.
-    const EPAUSED: u64 = 2;
-
     const ASSET_SYMBOL: vector<u8> = b"FA";
 
 
