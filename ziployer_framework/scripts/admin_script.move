@@ -1,8 +1,9 @@
 script {
     use ziptos_framework::Deployer;
 
-    fun init(ziptos_framework: &signer, fee: u64, owner: address) {//change the fee accordingly
-        Deployer::init(ziptos_framework, fee, owner);
+    fun init(ziptos_framework: &signer, fee: u64, owner: address, pending_owner: address) {
+        //change the fee accordingly
+        Deployer::init(ziptos_framework, fee, owner, pending_owner);
     }
 }
 
@@ -17,7 +18,8 @@ script {
 script {
     use ziptos_framework::Deployer;
 
-    fun update_owner(ziptos_framework: &signer, new_owner: address) {
-        Deployer::update_owner(ziptos_framework, new_owner);
+    fun offer_ownership(ziptos_framework: &signer, new_owner: address) {
+        Deployer::offer_ownership(ziptos_framework, new_owner);
     }
+
 }

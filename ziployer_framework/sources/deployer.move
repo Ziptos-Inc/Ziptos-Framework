@@ -1,13 +1,5 @@
 module ziptos_framework::Deployer {
 
-    use aptos_framework::fungible_asset::{Self, MintRef, TransferRef, BurnRef, Metadata, FungibleAsset};
-    use aptos_framework::object::{Self, Object};
-    use aptos_framework::primary_fungible_store;
-    use aptos_framework::function_info;
-    use aptos_framework::dispatchable_fungible_asset;
-    use std::error;
-    use std::option;
-
     use aptos_framework::coin::{
         Self, 
         BurnCapability, 
@@ -15,13 +7,13 @@ module ziptos_framework::Deployer {
         MintCapability
     };
     use aptos_framework::aptos_coin::AptosCoin;
-    use aptos_framework::managed_coin;
     use std::signer;
-    use std::string::{Self,String,utf8};
+    use std::string::String;
 
     struct Config has key {
         owner: address,
-        fee: u64
+        fee: u64,
+        pending_owner: address
     }
 
     struct Capabilities<phantom CoinType> has key {
@@ -38,7 +30,7 @@ module ziptos_framework::Deployer {
     const ASSET_SYMBOL: vector<u8> = b"FA";
 
 
-    entry public fun init(ziptos_framework: &signer, fee: u64, owner: address){
+    entry public fun init(ziptos_framework: &signer, fee: u64, owner: address, pending_owner: address){
         assert!(
             signer::address_of(ziptos_framework) == @ziptos_framework, 
             ERROR_INVALID_ZIPTOS_ACCOUNT
@@ -46,7 +38,8 @@ module ziptos_framework::Deployer {
 
         move_to(ziptos_framework, Config {
             owner,
-            fee
+            fee,
+            pending_owner
         });
     }
 
@@ -62,16 +55,35 @@ module ziptos_framework::Deployer {
         config.fee = new_fee;
     }
 
-    entry public fun update_owner(ziptos_framework: &signer, new_owner: address) acquires Config {
-        assert!(
-            signer::address_of(ziptos_framework) == @ziptos_framework, 
+    public entry fun offer_ownership(account: &signer, new_owner: address) 
+    acquires Config
+    {
+         assert!(
+            signer::address_of(account) == @ziptos_framework, 
             ERROR_INVALID_ZIPTOS_ACCOUNT
         );
-        // only allowed after the deployer is initialized
-        assert!(exists<Config>(@ziptos_framework), ERROR_ERROR_INSUFFICIENT_APT_BALANCE);
 
+         // only allowed after the deployer is initialized
+        assert!(exists<Config>(@ziptos_framework), ERROR_ERROR_INSUFFICIENT_APT_BALANCE);
         let config = borrow_global_mut<Config>(@ziptos_framework);
-        config.owner = new_owner;
+        config.pending_owner = new_owner;
+
+    }
+
+    public entry fun accept_ownership(account: &signer) 
+    acquires Config
+    {
+         // only allowed after the deployer is initialized
+        assert!(exists<Config>(@ziptos_framework), ERROR_ERROR_INSUFFICIENT_APT_BALANCE);
+        let config = borrow_global_mut<Config>(@ziptos_framework);
+
+        assert!(
+            signer::address_of(account) == config.pending_owner, 
+            ERROR_INVALID_ZIPTOS_ACCOUNT
+        );
+
+        config.owner = signer::address_of(account);
+
     }
 
     // Generates a new coin and mints the total supply to the deployer. capabilties are then destroyed
